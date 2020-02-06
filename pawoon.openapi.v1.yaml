@@ -1,0 +1,1975 @@
+swagger: '2.0'
+info:
+  title: pawoon.openapi.v1
+  version: '1.0'
+  contact:
+    name: Pawoon
+    email: support@pawoon.com
+    url: 'https://help.pawoon.com/id/'
+  license:
+    name: 'MIT, Apache 2'
+  description: |-
+    We offer a RESTful API that allows you to work with Pawoon data for your own applications. All methods from the API use either the GET, POST, PUT, or DELETE verbs and return standard JSON objects. We have provided sample responses for each method described below.
+    Your access to data through the API is identical to your access to data within the Pawoon application.
+host: pawoon-open-api-dev-1.ap-southeast-1.elasticbeanstalk.com
+schemes:
+  - http
+produces:
+  - application/json
+consumes:
+  - application/json
+  - application/x-www-form-urlencoded
+paths:
+  /companies/me:
+    get:
+      summary: Company
+      tags:
+        - Company
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Companies'
+      operationId: get-companies-me
+      description: Get a Company
+      parameters:
+        - type: string
+          in: header
+          name: Accept
+          required: true
+        - type: string
+          in: header
+          name: Authorization
+          required: true
+  /outlets:
+    get:
+      summary: Outlet
+      tags:
+        - Outlet
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Outlets'
+      operationId: get-outlets
+      description: Get List of Outlets
+      parameters:
+        - type: string
+          in: header
+          required: true
+          name: Accept
+        - type: string
+          in: header
+          required: true
+          name: Authorization
+  /devices:
+    get:
+      summary: Device
+      tags:
+        - Device
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Devices'
+      operationId: get-devices
+      description: Get List of Devices
+      parameters:
+        - type: string
+          in: header
+          name: Accept
+          required: true
+        - type: string
+          in: header
+          name: Authorization
+          required: true
+  /taxes:
+    get:
+      summary: Taxes
+      tags:
+        - 'Service & Tax'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Taxes'
+      operationId: get-taxes
+      parameters:
+        - type: string
+          in: header
+          name: Accept
+          required: true
+        - type: string
+          in: header
+          name: Authorization
+          required: true
+      description: Get List of Taxes
+  /services:
+    get:
+      summary: Services
+      tags:
+        - 'Service & Tax'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Services'
+      parameters:
+        - type: string
+          in: header
+          name: Accept
+          required: true
+        - type: string
+          in: header
+          name: Authorization
+          required: true
+      operationId: get-services
+      description: Get List of Services
+  /users:
+    get:
+      summary: Users
+      tags:
+        - User
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Users'
+      operationId: get-users
+      parameters:
+        - type: string
+          in: header
+          name: Accept
+          required: true
+        - type: string
+          in: header
+          name: Authorization
+          required: true
+      description: 'Get List of Users (Owner, Super_admin, Staff, Cashier)'
+  '/outlets/{outletID}/promos':
+    parameters:
+      - type: string
+        name: outletID
+        in: path
+        required: true
+    get:
+      summary: Promo
+      tags:
+        - Promo
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Promos'
+      operationId: get-promos
+      description: Get List of Promo in Spesific Outlet
+      parameters:
+        - type: string
+          in: header
+          name: Accept
+          required: true
+        - type: string
+          in: header
+          required: true
+          name: Authorization
+  /company-payment-methods:
+    get:
+      summary: Payment Methods
+      tags:
+        - Company
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/CompanyPaymentMethods'
+      operationId: get-company-payment-methods
+      description: Get List of Payment Method in a Company
+      parameters:
+        - type: string
+          in: header
+          name: Accept
+          required: true
+        - type: string
+          in: header
+          name: Authorization
+          required: true
+  '/promos/{promoID}/detail':
+    get:
+      summary: Promo Detail
+      tags:
+        - Promo
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PromoDetail'
+      operationId: get-promo
+      description: Get a Detail of Promo
+      parameters:
+        - type: string
+          in: header
+          name: Accept
+          required: true
+        - type: string
+          in: header
+          name: Authorization
+          required: true
+    parameters:
+      - type: string
+        name: promoID
+        in: path
+        required: true
+  /products:
+    get:
+      summary: Product
+      tags:
+        - Product
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Products'
+      operationId: get-products
+      parameters:
+        - type: string
+          in: header
+          name: Accept
+          required: true
+        - type: string
+          in: header
+          name: Authorization
+          required: true
+      description: Get List of Products
+  /products/categories:
+    get:
+      summary: ProductsCategories
+      tags:
+        - Product
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ProductCategory'
+      operationId: get-products-categories
+      parameters:
+        - type: string
+          in: header
+          name: Accept
+          required: true
+        - type: string
+          in: header
+          name: Authorization
+          required: true
+      description: Get List of Categories
+  '/products/{productID}/variants':
+    parameters:
+      - type: string
+        name: productID
+        in: path
+        required: true
+    get:
+      summary: Variant
+      tags:
+        - Product
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ProductVariantExample'
+      operationId: get-products-productID-variants
+      parameters:
+        - type: string
+          in: header
+          name: Accept
+          required: true
+        - type: string
+          in: header
+          name: Authorization
+          required: true
+      description: Get a Variants in specific Product
+  '/devices/{deviceID}/assignments':
+    parameters:
+      - type: string
+        name: deviceID
+        in: path
+        required: true
+    post:
+      summary: Assign Device
+      operationId: post-devices-deviceID-assignments
+      responses:
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/AssigningDevice'
+        '403':
+          description: Forbidden - user not in outlet
+          schema:
+            $ref: '#/definitions/ErrorGlobalResponse'
+      parameters:
+        - type: string
+          in: header
+          name: Accept
+          required: true
+        - type: string
+          in: header
+          name: Authorization
+          required: true
+        - in: header
+          name: Content-Type
+          type: string
+        - in: body
+          name: body
+          schema:
+            type: object
+            properties:
+              OutletID:
+                type: string
+          x-examples: {}
+      tags:
+        - Device
+      consumes:
+        - application/x-www-form-urlencoded
+      description: Assigning Device
+  /transactions:
+    get:
+      summary: Transactions
+      tags:
+        - Transactions
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Transactions'
+      operationId: get-transactions
+      parameters:
+        - type: string
+          in: header
+          name: Accept
+          required: true
+        - type: string
+          in: header
+          name: Authorization
+          required: true
+      description: Get Detail of Transaction
+  '/transactions/{transactionID}/payments':
+    parameters:
+      - type: string
+        name: transactionID
+        in: path
+        required: true
+        description: ''
+    get:
+      summary: TransactionPayments
+      tags:
+        - Transactions
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/TransactionPayments'
+      operationId: get-transactions-transactionID-payments
+      parameters:
+        - type: string
+          in: header
+          name: Accept
+          required: true
+        - type: string
+          in: header
+          name: Authorization
+          required: true
+      description: Get a Transaction Payment method
+  '/transactions/{transactionID}/items':
+    parameters:
+      - type: string
+        name: transactionID
+        in: path
+        required: true
+    get:
+      summary: TransactionItems
+      tags:
+        - Transactions
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/TransactionItems'
+      operationId: get-transactions-transactionID-items
+      parameters:
+        - type: string
+          in: header
+          name: Accept
+          required: true
+        - type: string
+          in: header
+          name: Authorization
+          required: true
+      description: Get List of Items Transaction
+  '/outlets/{outletID}/checkouts':
+    parameters:
+      - type: string
+        name: outletID
+        in: path
+        required: true
+    post:
+      summary: Checkouts
+      operationId: post-outlets-outletID-checkouts
+      responses:
+        '200':
+          description: Done
+          schema:
+            $ref: '#/definitions/CheckoutResponse'
+      parameters:
+        - in: body
+          name: body
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                coordinate:
+                  $ref: '#/definitions/Coordinate'
+                device_details:
+                  $ref: '#/definitions/DeviceDetail'
+                done:
+                  type: string
+                installment:
+                  type: string
+                installment_period:
+                  type: string
+                local_id:
+                  type: string
+                cashier_id:
+                  type: string
+                  example: 4e411520-9800-11e9-9610-91792c9f89ee
+                  description: Input userID
+                total_change:
+                  type: string
+                customer_email:
+                  type: string
+                customer_name:
+                  type: string
+                customer_phone:
+                  type: string
+                device_id:
+                  type: string
+                  example: 4eb3d5d0-9800-11e9-a978-5334266a6253
+                  description: Input deviceID
+                device_timestamp:
+                  type: string
+                discount_amount:
+                  type: string
+                discount_percentage:
+                  type: string
+                final_amount:
+                  type: string
+                items:
+                  type: array
+                  items:
+                    $ref: '#/definitions/CheckoutItems'
+                note:
+                  type: string
+                outlet_id:
+                  type: string
+                  example: 4e411520-9800-11e9-9610-91792c9f89ee
+                  description: input outletID
+                payments:
+                  type: array
+                  items:
+                    $ref: '#/definitions/CheckoutPayments'
+                receipt_code:
+                  type: string
+                round_amount:
+                  type: string
+                status:
+                  type: string
+                taxes_and_services:
+                  type: array
+                  items:
+                    $ref: '#/definitions/CheckoutTaxService'
+                total_item_amount:
+                  type: string
+                total_item_cost:
+                  type: string
+                total_item_discount:
+                  type: string
+                total_payment:
+                  type: string
+                total_service:
+                  type: string
+                total_tax:
+                  type: string
+                promos:
+                  type: array
+                  items: {}
+                subtotal:
+                  type: string
+                total_discount:
+                  type: string
+                receipt_total_discount:
+                  type: string
+              required:
+                - cashier_id
+                - device_id
+                - outlet_id
+          x-examples: {}
+        - type: string
+          in: header
+          name: Accept
+          required: true
+        - type: string
+          in: header
+          name: Authorization
+          required: true
+        - type: string
+          in: header
+          name: Content-Type
+      tags:
+        - Transactions
+  /modifiers:
+    get:
+      summary: Modifiers
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Modifiers'
+      operationId: get-modifiers
+      parameters:
+        - type: string
+          in: header
+          name: Accept
+          required: true
+        - type: string
+          in: header
+          name: Authorization
+          required: true
+      tags:
+        - Product
+      description: Get List of Modifiers
+  /oauth/token:
+    post:
+      summary: OAuth
+      operationId: post-oauth-token
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/OAuthResponse'
+      parameters:
+        - type: string
+          in: header
+          name: Accept
+          required: true
+        - in: body
+          name: body
+          schema:
+            type: object
+            properties:
+              grant_type:
+                type: string
+                example: client_credentials
+              client_id:
+                type: string
+                description: The client identifier issued from Pawoon
+                example: '3'
+              client_secret:
+                type: string
+            required:
+              - grant_type
+              - client_id
+              - client_secret
+      tags:
+        - OAuth
+      description: Request Access Token
+  /orders:
+    post:
+      summary: Order
+      operationId: post-orders
+      responses:
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/SubmitOrderResponse'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorGlobalResponse'
+        '422':
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/ErrorInvalidDataResponse'
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SubmitOrderRequest'
+          x-examples: {}
+        - in: body
+          name: body
+          schema:
+            type: object
+            properties: {}
+          x-examples:
+            example-1: {}
+      tags:
+        - Order
+  /orders/status:
+    parameters: []
+    put:
+      summary: Order Status
+      operationId: put-orders-status
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorGlobalResponse'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorGlobalResponse'
+        '422':
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/ErrorInvalidDataResponse'
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/UpdateOrderStatusRequest'
+      tags:
+        - Order
+definitions:
+  Companies:
+    title: CompanyResponse
+    type: object
+    x-tags:
+      - Models
+    description: Company Information
+    properties:
+      data:
+        type: object
+        properties:
+          id:
+            type: string
+            example: 4e3b1b90-9800-11e9-a3b8-67e0ad65f13b
+          name:
+            type: string
+            example: resto1
+          created_at:
+            type: string
+            format: date-time
+            example: '2019-06-26 10:51:09+00:00'
+          updated_at:
+            type: string
+            format: date-time
+            example: '2020-01-20 06:59:03+00:00'
+        required:
+          - id
+          - name
+          - created_at
+          - updated_at
+  Devices:
+    title: DeviceResponse
+    type: object
+    x-tags:
+      - Models
+    description: List of Device
+    properties:
+      data:
+        type: array
+        items:
+          type: object
+          properties:
+            id:
+              type: string
+              example: 4eb3d5d0-9800-11e9-a978-5334266a6253
+            name:
+              type: string
+              example: PU1
+            type:
+              type: string
+              example: main
+            image:
+              type: string
+              example: a.png
+            price:
+              type: integer
+              example: 599000
+            is_expired:
+              type: boolean
+              example: false
+            is_available:
+              type: boolean
+              example: false
+            locked_down_at:
+              type: string
+              format: date-time
+              example: '2021-01-20 10:58:30+00:00'
+            created_at:
+              type: string
+              format: date-time
+              example: '2020-01-20 06:58:30+00:00'
+            updated_at:
+              type: string
+              format: date-time
+              example: '2020-01-20 07:22:31+00:00'
+      meta:
+        type: object
+        properties:
+          count:
+            example: 1
+            type: integer
+          total:
+            type: integer
+            example: 1
+          page:
+            type: integer
+            example: 1
+          per_page:
+            type: integer
+            example: 25
+  Outlets:
+    title: OutletResponse
+    type: object
+    x-tags:
+      - Models
+    description: show list of outlet
+    properties:
+      data:
+        type: array
+        items:
+          type: object
+          properties:
+            id:
+              type: string
+              example: 4e411520-9800-11e9-9610-91792c9f89ee
+            name:
+              type: string
+              example: Outlet Rahman
+            modules:
+              type: array
+              items:
+                type: string
+            created_at:
+              type: string
+              format: date-time
+              example: '2019-06-26 10:51:09+00:00'
+            updated_at:
+              type: string
+              format: date-time
+              example: '2019-10-14 06:21:07+00:00'
+      meta:
+        type: object
+        properties:
+          count:
+            type: integer
+            example: 1
+          total:
+            example: 1
+            type: integer
+          page:
+            example: 1
+            type: integer
+          per_page:
+            example: 100
+            type: integer
+  Promos:
+    title: PromoResponse
+    type: object
+    x-examples: {}
+    description: show list of promo
+    x-tags:
+      - Models
+    properties:
+      data:
+        type: array
+        items:
+          type: object
+          properties:
+            id:
+              type: string
+              example: f10037a0-3b69-11ea-8d85-835d9345fe93
+            title:
+              type: string
+              example: 'Diskon 5% untuk Pembelian Minimum 2 Pecel Lele'
+            promo_type:
+              type: string
+              example: discount min n qty
+            start_date:
+              type: string
+              format: date
+              example: '2020-01-01'
+            end_date:
+              type: string
+              format: date
+              example: '2030-01-01'
+            start_time:
+              type: string
+              format: time
+              example: '08:30:00'
+            end_time:
+              type: string
+              format: time
+              example: '23:45:00'
+            day_list:
+              type: string
+              example: '1|2|3|4|5|6|0'
+            discount:
+              type: integer
+              example: 5
+            discount_type:
+              type: string
+              example: percentage
+            min_qty:
+              type: integer
+              example: 2
+            multiple:
+              type: boolean
+              example: false
+            is_active:
+              type: boolean
+              example: true
+            created_at:
+              type: string
+              format: date-time
+              example: '2020-01-20 09:47:58+00:00'
+            updated_at:
+              type: string
+              format: date-time
+              example: '2020-01-20 09:47:58+00:00'
+          required:
+            - id
+            - title
+            - promo_type
+            - discount
+            - discount_type
+            - multiple
+            - is_active
+            - created_at
+            - updated_at
+      meta:
+        type: object
+        properties:
+          count:
+            type: integer
+            example: 1
+          total:
+            type: integer
+            example: 1
+          page:
+            type: integer
+            example: 1
+          per_page:
+            type: integer
+            example: 25
+  Users:
+    title: UserResponse
+    type: object
+    x-tags:
+      - Models
+    description: show list of user
+    properties:
+      data:
+        type: array
+        items:
+          type: object
+          properties:
+            id:
+              type: string
+              example: 4e3a9c80-9800-11e9-bf5e-9737dd33acea
+            name:
+              type: string
+              example: Rahman
+            img:
+              type: string
+              example: a.png
+            email:
+              type: string
+              format: email
+              example: rahman.darmawan+tier1@pawoon.com
+            phone:
+              type: string
+              example: '+6287788114217'
+            status:
+              type: string
+              example: active
+            pin:
+              type: string
+              example: '1111'
+            role:
+              type: string
+              example: owner
+            created_at:
+              type: string
+              format: date-time
+              example: '2019-06-26 10:51:09+00:00'
+            updated_at:
+              type: string
+              format: date-time
+              example: '2020-01-20 13:05:10+00:00'
+      meta:
+        type: object
+        properties:
+          count:
+            type: integer
+            example: 1
+          total:
+            type: integer
+            example: 1
+          page:
+            type: integer
+            example: 1
+          per_page:
+            type: integer
+            example: 25
+  Services:
+    title: ServiceResponse
+    type: object
+    x-tags:
+      - Models
+    description: List of Services
+    properties:
+      data:
+        type: array
+        items:
+          type: object
+          properties:
+            id:
+              type: string
+              example: f89d91a0-3bcb-11e9-a9fd-ddc0be97f5d1
+            name:
+              type: string
+              example: 'Service, Holiday Sucharge'
+            percentage:
+              type: integer
+              example: 5
+            created_at:
+              type: string
+              format: date-time
+              example: '2019-03-01 02:44:44+00:00'
+            updated_at:
+              type: string
+              format: date-time
+              example: '2019-03-01 03:44:44+00:00'
+      meta:
+        type: object
+        properties:
+          count:
+            type: integer
+            example: 1
+          total:
+            type: integer
+            example: 1
+          page:
+            type: integer
+            example: 1
+          per_page:
+            type: integer
+            example: 25
+  Taxes:
+    title: TaxResponse
+    type: object
+    x-tags:
+      - Models
+    description: show list of tax
+    properties:
+      data:
+        type: array
+        items:
+          type: object
+          properties:
+            id:
+              type: string
+              example: 9c415e60-3bcb-11e9-86f2-8da0681c6a2b
+            name:
+              type: string
+              example: Pb1
+            percentage:
+              type: integer
+              example: 10
+            created_at:
+              type: string
+              format: date-time
+              example: '2019-03-01 02:42:09+00:00'
+            updated_at:
+              type: string
+              format: date-time
+              example: '2019-03-01 02:44:38+00:00'
+      meta:
+        type: object
+        properties:
+          count:
+            type: integer
+            example: 1
+          total:
+            type: integer
+            example: 1
+          page:
+            type: integer
+            example: 1
+          per_page:
+            type: integer
+            example: 25
+  CompanyPaymentMethods:
+    title: CompanyPaymentMethodResponse
+    type: object
+    description: show list of payment methods
+    x-tags:
+      - Models
+    properties:
+      data:
+        type: array
+        items:
+          type: object
+          properties:
+            id:
+              type: string
+              example: 6609c0d0-ade9-11e9-86cb-1f1dd05b2407
+            name:
+              type: string
+              example: CC
+            created_at:
+              type: string
+              format: date-time
+              example: '2019-07-24 08:02:36+00:00'
+            updated_at:
+              type: string
+              format: date-time
+              example: '2019-07-24 08:02:36+00:00'
+      meta:
+        type: object
+        properties:
+          count:
+            type: integer
+            example: 1
+          total:
+            type: integer
+            example: 1
+          page:
+            type: integer
+            example: 1
+          per_page:
+            type: integer
+            example: 25
+  PromoDetail:
+    title: PromoDetailResponse
+    type: object
+    description: This model will show promo detail response
+    x-tags:
+      - Models
+    properties:
+      title:
+        type: string
+        example: 'Diskon 10%, Minimal Belanja Rp. 10.000'
+      promo_type:
+        type: string
+        example: discount min n amount
+      start_date:
+        type: string
+        format: date
+        example: '2019-05-01'
+      end_date:
+        type: string
+        format: date
+        example: '2019-07-05'
+      start_time:
+        type: string
+        format: time
+        example: '00:01:00'
+      end_time:
+        type: string
+        format: time
+        example: '23:59:00'
+      day_list:
+        type: string
+        example: '1|2|3|4|5|6|0'
+      discount:
+        type: integer
+        example: 10
+      discount_type:
+        type: string
+        example: percentage
+      min_purchase:
+        type: integer
+        example: 10000
+      min_qty:
+        type: integer
+        example: 1
+      multiple:
+        type: integer
+        example: 0
+      get_qty:
+        type: integer
+        example: 2
+      buy_at:
+        type: string
+        example: 'null'
+      is_active:
+        type: integer
+        example: 1
+      company_id:
+        type: integer
+        example: 150335
+      created_by:
+        type: integer
+        example: 201139
+      edited_by:
+        type: integer
+        example: 201139
+      deleted_by:
+        type: integer
+        example: null
+      id:
+        type: integer
+        example: 2611
+      uuid:
+        type: string
+        format: uuid
+        example: 8a276e50-6d86-11e9-9f5e-a9e55f1023ec
+      created_at:
+        type: string
+        format: date-time
+        example: '2019-05-03T09:33:42.000Z'
+      updated_at:
+        type: string
+        format: date-time
+        example: '2019-07-04T04:46:20.000Z'
+      deleted_at:
+        type: string
+        example: 'null'
+      promo_detail:
+        type: array
+        items: {}
+  Products:
+    title: ProductResponse
+    type: object
+    description: show list of product
+    x-tags:
+      - Models
+    properties:
+      data:
+        type: array
+        items:
+          type: object
+          properties:
+            id:
+              type: string
+              example: 8c7288d0-aeb1-11e9-964e-d9d97e7fb3b2
+            name:
+              type: string
+              example: V 2 baris
+            type:
+              type: string
+              example: single
+            use_outlet_tax:
+              type: boolean
+              example: true
+            product_category_id:
+              type: string
+              example: e83fc140-9be3-11e9-8390-110bf3457179
+            created_at:
+              type: string
+              format: date-time
+              example: '2019-07-25 07:55:20+00:00'
+            updated_at:
+              type: string
+              format: date-time
+              example: '2019-07-25 09:49:09+00:00'
+      meta:
+        type: object
+        properties:
+          count:
+            type: integer
+            example: 1
+          total:
+            type: integer
+            example: 1
+          page:
+            type: integer
+            example: 1
+          per_page:
+            type: integer
+            example: 25
+  ProductCategory:
+    title: ProductCategoryResponse
+    type: object
+    description: show list of category
+    x-tags:
+      - Models
+    properties:
+      data:
+        type: array
+        items:
+          type: object
+          properties:
+            id:
+              type: string
+              example: 17c98410-3bcc-11e9-9788-c7e0bfbecb8a
+            name:
+              type: string
+              example: '#1normal Sync'
+            created_at:
+              type: string
+              example: '2019-03-01 02:45:36+00:00'
+              format: date-time
+            updated_at:
+              type: string
+              format: date-time
+              example: '2019-06-18 04:32:05+00:00'
+      meta:
+        type: object
+        properties:
+          count:
+            type: integer
+            example: 1
+          total:
+            type: integer
+            example: 1
+          page:
+            type: integer
+            example: 1
+          per_page:
+            type: integer
+            example: 25
+  ProductVariantObject:
+    title: ProductVariant
+    type: object
+    properties:
+      id:
+        type: string
+        example: 8c767e60-aeb1-11e9-9bb8-95214368acab
+      name:
+        type: string
+        example: V 2 baris - s - l
+      type:
+        type: string
+        example: single
+      use_outlet_tax:
+        type: boolean
+      product_category_id:
+        type: string
+        example: e83fc140-9be3-11e9-8390-110bf3457179
+      created_at:
+        type: string
+        example: '2019-07-25 07:55:20+00:00'
+      updated_at:
+        type: string
+        example: '2019-07-25 09:46:55+00:00'
+    x-tags:
+      - Models
+  ProductVariantExample:
+    type: object
+    properties:
+      data:
+        type: array
+        items:
+          $ref: '#/definitions/ProductVariantObject'
+        example:
+          - id: 8c767e60-aeb1-11e9-9bb8-95214368acab
+            name: V 2 baris - s - l
+            type: single
+            use_outlet_tax: true
+            product_category_id: e83fc140-9be3-11e9-8390-110bf3457179
+            created_at: '2019-07-25 07:55:20+00:00'
+            updated_at: '2019-07-25 09:46:55+00:00'
+          - id: 8c7bc3a0-aeb1-11e9-aa3f-59ad6631591c
+            name: V 2 baris - s - m
+            type: single
+            use_outlet_tax: true
+            product_category_id: e83fc140-9be3-11e9-8390-110bf3457179
+            created_at: '2019-07-25 07:55:20+00:00'
+            updated_at: '2019-07-25 09:46:55+00:00'
+    title: ProductVariantExample
+    x-tags:
+      - Models
+  AssigningDevice:
+    title: AssigningDevice
+    type: object
+    properties:
+      data:
+        type: object
+        properties:
+          id:
+            type: integer
+          assigning_at:
+            type: string
+          status:
+            type: string
+            enum:
+              - assigning
+          outlet:
+            $ref: '#/definitions/OutletObject'
+          device:
+            $ref: '#/definitions/DeviceObject'
+    description: ''
+    x-tags:
+      - Models
+  DeviceObject:
+    title: DeviceObjectResponse
+    type: object
+    properties:
+      data:
+        type: object
+        properties:
+          id:
+            type: string
+          name:
+            type: string
+          type:
+            type: string
+          image:
+            type: string
+          price:
+            type: string
+          is_expired:
+            type: boolean
+          is_available:
+            type: boolean
+          locked_down_at:
+            type: string
+          created_at:
+            type: string
+          updated_at:
+            type: string
+    x-tags:
+      - Models
+  OutletObject:
+    title: OutletObjectResponse
+    type: object
+    properties:
+      data:
+        type: object
+        properties:
+          id:
+            type: string
+          name:
+            type: string
+          modules:
+            type: array
+            items: {}
+          created_at:
+            type: string
+          updated_at:
+            type: string
+    x-tags:
+      - Models
+  ErrorGlobalResponse:
+    type: object
+    properties:
+      error:
+        type: object
+        properties:
+          target:
+            type: string
+            description: The problem which trigger error
+          reason:
+            type: string
+            description: 'Error code, should be CAPITAL_SNAKE format'
+          message:
+            type: string
+            description: Error message for developer
+    title: ErrorGlobalResponse
+    x-tags:
+      - Models
+  Transactions:
+    title: TransactionsResponse
+    type: object
+    x-tags:
+      - Models
+    properties:
+      data:
+        type: array
+        items:
+          type: object
+          properties:
+            outlet_id:
+              type: integer
+            device_id:
+              type: integer
+            cashier_id:
+              type: integer
+            customer_id:
+              type: integer
+            sales_type_id:
+              type: integer
+            reconciliation_id:
+              type: integer
+            promo_id:
+              type: integer
+            void_id:
+              type: integer
+            void_reason:
+              type: integer
+            device_timestamp:
+              type: string
+            receipt_code:
+              type: string
+            source:
+              type: string
+            customer_email:
+              type: string
+            grab_short_order_number:
+              type: string
+            status:
+              type: string
+            done:
+              type: integer
+            installment_type:
+              type: string
+            installment_period:
+              type: integer
+            sales_type_name:
+              type: string
+            total_service:
+              type: integer
+            total_payment:
+              type: integer
+            total_item_discount:
+              type: integer
+            total_item_amount:
+              type: integer
+            total_item_cost:
+              type: integer
+            total_discount:
+              type: integer
+            receipt_total_discount:
+              type: integer
+            discount_title:
+              type: string
+            discount_percentage:
+              type: integer
+            discount_amount:
+              type: integer
+            grab_order_id:
+              type: string
+            customer_name:
+              type: string
+            customer_phone:
+              type: string
+            note:
+              type: string
+            total_change:
+              type: integer
+            total_tax:
+              type: integer
+            subtotal:
+              type: integer
+            final_amount:
+              type: integer
+            round_amount:
+              type: integer
+            loyalty_transaction_id:
+              type: string
+            loyalty_voucher_transaction_id:
+              type: string
+            loyalty_point_transaction_id:
+              type: string
+            loyalty_user_id:
+              type: string
+            loyalty_redeemed_point:
+              type: string
+            loyalty_issued_point:
+              type: string
+            loyalty_total_point:
+              type: string
+            has_digital_product:
+              type: integer
+            digital_product_status:
+              type: integer
+            sync:
+              type: integer
+            integrated_payment_status:
+              type: integer
+            online_order_status:
+              type: string
+            id:
+              type: integer
+            uuid:
+              type: string
+              example: 43c55a40-fa1f-11e9-ad7c-2129272256fe
+              description: TransactionID Parameter
+            created_at:
+              type: string
+            updated_at:
+              type: string
+            deleted_at:
+              type: string
+            outlets:
+              type: object
+              properties:
+                name:
+                  type: string
+                company_id:
+                  type: integer
+                description:
+                  type: string
+                modules:
+                  type: string
+                id:
+                  type: integer
+                uuid:
+                  type: string
+                created_at:
+                  type: string
+                updated_at:
+                  type: string
+                deleted_at:
+                  type: string
+            payments:
+              type: object
+              properties:
+                title:
+                  type: string
+                method:
+                  type: string
+                transaction_id:
+                  type: integer
+                device_id:
+                  type: string
+                cashier_id:
+                  type: string
+                company_payment_method_id:
+                  type: string
+                details:
+                  type: string
+                amount:
+                  type: integer
+                change:
+                  type: integer
+                timezone:
+                  type: integer
+                timestamp:
+                  type: string
+                id:
+                  type: integer
+                created_at:
+                  type: string
+                updated_at:
+                  type: string
+                deleted_at:
+                  type: string
+      page:
+        type: integer
+      per_page:
+        type: integer
+      total:
+        type: integer
+  TransactionPayments:
+    title: TransactionPaymentsResponse
+    type: object
+    x-tags:
+      - Models
+    description: ''
+    properties:
+      data:
+        type: array
+        items:
+          type: object
+          properties:
+            title:
+              type: string
+            method:
+              type: string
+            transaction_id:
+              type: integer
+            device_id:
+              type: integer
+            cashier_id:
+              type: integer
+            company_payment_method_id:
+              type: integer
+            details:
+              type: string
+            amount:
+              type: integer
+            change:
+              type: integer
+            timezone:
+              type: integer
+            timestamp:
+              type: string
+            id:
+              type: integer
+            created_at:
+              type: string
+            updated_at:
+              type: string
+      page:
+        type: integer
+      per_page:
+        type: integer
+      total:
+        type: integer
+  TransactionItems:
+    title: TransactionItemsResponse
+    type: object
+    properties:
+      data:
+        type: array
+        items:
+          type: object
+          properties:
+            title:
+              type: string
+            transaction_id:
+              type: integer
+            product_id:
+              type: integer
+            promo_id:
+              type: integer
+            qty:
+              type: integer
+            amount:
+              type: integer
+            price:
+              type: integer
+            cost:
+              type: integer
+            note:
+              type: string
+            subtotal:
+              type: integer
+            id:
+              type: integer
+            created_at:
+              type: string
+            updated_at:
+              type: string
+            deleted_at:
+              type: string
+      page:
+        type: integer
+      per_page:
+        type: integer
+      total:
+        type: integer
+    x-tags:
+      - Models
+  Coordinate:
+    title: Coordinate
+    type: object
+    description: Coordinate information
+    x-tags:
+      - Models
+    properties:
+      lat:
+        type: string
+        example: '-6.2254142'
+      long:
+        type: string
+        example: '106.8283332'
+  DeviceDetail:
+    title: DeviceDetail
+    type: object
+    description: Device Detail Information
+    properties:
+      app_version:
+        type: string
+      manufacturer:
+        type: string
+      model:
+        type: string
+      os_version:
+        type: string
+    x-tags:
+      - Models
+  Modifiers:
+    title: Modifiers
+    type: object
+    x-tags:
+      - Models
+    properties:
+      data:
+        type: array
+        items:
+          type: object
+          properties:
+            id:
+              type: string
+              example: 6cae6ea0-9be4-11e9-9785-3de617fcc1ed
+            name:
+              type: string
+              example: '#1 Opsi O'
+            price:
+              type: integer
+              example: 5000
+      meta:
+        type: object
+        properties:
+          count:
+            type: number
+          total:
+            type: integer
+          page:
+            type: integer
+          per_page:
+            type: integer
+    description: 'Response Modifiers will show id, name, and price'
+  CheckoutTaxService:
+    title: CheckoutTaxService
+    type: object
+    properties:
+      amount:
+        type: string
+      percentage:
+        type: string
+      tax_and_service_id:
+        type: string
+      title:
+        type: string
+      type:
+        type: string
+    x-tags:
+      - Models
+  CheckoutPayments:
+    title: CheckoutPayments
+    type: object
+    properties:
+      id:
+        type: string
+      amount:
+        type: string
+      change:
+        type: string
+      method:
+        type: string
+      company_payment_method_id:
+        type: string
+      timestamp:
+        type: string
+      title:
+        type: string
+    x-tags:
+      - Models
+  CheckoutItems:
+    title: CheckoutItems
+    type: object
+    properties:
+      id:
+        type: string
+      amount:
+        type: string
+      cost:
+        type: string
+      discount_amount:
+        type: string
+      discount_percentage:
+        type: string
+      modifiers_amount:
+        type: string
+      modifiers_cost:
+        type: string
+      modifiers_discount:
+        type: string
+      price:
+        type: string
+      product_id:
+        type: string
+      qty:
+        type: string
+      subtotal:
+        type: string
+      taxes_and_services:
+        type: array
+        items: {}
+      title:
+        type: string
+      promos:
+        type: array
+        items: {}
+    description: ''
+    x-tags:
+      - Models
+  CheckoutResponse:
+    title: CheckoutResponse
+    type: object
+    properties:
+      data:
+        type: object
+        properties:
+          id:
+            type: string
+          created_at:
+            type: string
+          deleted_at:
+            type: string
+    x-tags:
+      - Models
+  OAuthResponse:
+    title: OAuthResponse
+    type: object
+    x-tags:
+      - Models
+    properties:
+      token_type:
+        type: string
+        description: The type of the token issued which is case insensitive
+        example: 2YotnFZFEjr1zCsicMWpAA
+      expires_in:
+        type: string
+        description: The lifetime in seconds of the access token
+        example: '3600'
+      access_token:
+        type: string
+        description: The access token issued by client
+  SubmitOrderRequest:
+    title: SubmitOrderRequest
+    type: object
+    x-tags:
+      - Models
+    properties:
+      data:
+        type: object
+        properties:
+          receipt_code:
+            type: string
+            description: The order receipt code from client
+          outlet_id:
+            type: string
+            description: "Outlet's ID where the order going to be pushed"
+          order_time:
+            type: string
+            description: Order creation time
+          items:
+            $ref: '#/definitions/SubmitOrderRequestItem'
+        required:
+          - receipt_code
+          - outlet_id
+          - order_time
+          - items
+      payment:
+        $ref: '#/definitions/SubmitOrderRequestPayment'
+  SubmitOrderRequestItem:
+    title: SubmitOrderRequestItem
+    type: array
+    description: ''
+    x-tags:
+      - Models
+    items:
+      type: object
+      properties:
+        product_id:
+          type: string
+          description: "Item's product ID on Pawoon System"
+        price:
+          type: integer
+          format: int64
+          description: "Item's price"
+        qty:
+          type: integer
+          format: int32
+        notes:
+          type: string
+        modifiers:
+          $ref: '#/definitions/SubmitOrderRequestItemModifier'
+      required:
+        - product_id
+        - price
+        - qty
+  SubmitOrderRequestItemModifier:
+    title: SubmitOrderRequestItemModifier
+    type: array
+    x-tags:
+      - Models
+    items:
+      type: object
+      properties:
+        modifier_id:
+          type: string
+          description: "Modifier's ID on Pawoon system"
+        price:
+          type: string
+          description: "Modifier's price"
+        qty:
+          type: string
+      required:
+        - modifier_id
+        - price
+        - qty
+  SubmitOrderRequestPayment:
+    title: SubmitOrderRequestPayment
+    type: object
+    x-tags:
+      - Models
+    properties:
+      method:
+        type: string
+        enum:
+          - cash
+          - card
+          - others
+        description: |-
+          * `cash` - Cash
+          * `card` - Card
+          * `others` - Custom payment method on Pawoon system. If using this method, the custom_payment_method_id must be filled
+      amount:
+        type: integer
+        format: int64
+        description: Payment amount
+      company_payment_method_id:
+        type: string
+        description: "Company's payment method ID on Pawoon system, use this key when method payment using `others`"
+    required:
+      - method
+      - amount
+  SubmitOrderResponse:
+    title: SubmitOrderResponse
+    type: object
+    properties:
+      data:
+        type: object
+        properties:
+          transaction_id:
+            type: string
+            description: "Pawoon's transaction ID"
+    x-tags:
+      - Models
+  ErrorInvalidDataResponse:
+    title: ErrorInvalidDataResponse
+    type: object
+    properties:
+      errors:
+        type: object
+        properties:
+          field_name:
+            type: string
+            description: Error message for the invalid field_name. Ex. This field is required
+          field_name_2:
+            type: string
+            description: Error message for the invalid field_name_2. Ex. This field must be a numeric
+    x-tags:
+      - Models
+  UpdateOrderStatusRequest:
+    title: UpdateOrderStateRequest
+    type: object
+    x-tags:
+      - Models
+    properties:
+      data:
+        type: object
+        properties:
+          transaction_id:
+            type: string
+            description: "Pawoon's transaction ID from submit order"
+          state:
+            type: string
+            enum:
+              - DRIVER_ALLOCATED
+              - DRIVER_ARRIVED
+              - DELIVERED
+              - COLLECTED
+              - CANCELLED
+              - FAILED
+            description: |-
+              * `DRIVER_ALLOCATED` - Driver has been allocated
+              * `DRIVER_ARRIVED` - Driver has arrived
+              * `COLLECTED` - Food has been collected by driver from merchant
+              * `DELIVERED` - Food has been delivered to eater by driver
+              * `CANCELLED` - Food has been cancelled
+              * `FAILED` - Order is fail, could because of unallocated, reallocation failed, system issue and so on
+          message:
+            type: string
+            description: Additional information to describe order state like the reason of CANCELLED/FAIL
+securityDefinitions: {}
